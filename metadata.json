@@ -1,0 +1,6 @@
+{
+  "name": "Pustaka Nirmala",
+  "description": "Perpustakaan digital berdesain elegan dengan nuansa warna lembut untuk membaca dan mengakses koleksi buku terkurasi secara daring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

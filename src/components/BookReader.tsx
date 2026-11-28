@@ -44,34 +44,34 @@ const THEME_STYLES: Record<
   }
 > = {
   hangat: {
-    bg: 'bg-[#FAF8F3]',
-    surface: 'bg-[#F2EFE7]',
-    border: 'border-[#E4DFD3]',
-    text: 'text-[#242825]',
-    muted: 'text-[#626A64]',
-    accentBtn: 'bg-[#3D5A4F] text-[#FAF9F6] hover:bg-[#2F473E]',
-    label: 'Kertas Hangat',
-    swatch: '#FAF8F3',
+    bg: 'bg-[#FDF7F8]',
+    surface: 'bg-[#F6E9ED]',
+    border: 'border-[#EEDCE2]',
+    text: 'text-[#2D2226]',
+    muted: 'text-[#6E5A62]',
+    accentBtn: 'bg-[#B5536E] text-[#FFFFFF] hover:bg-[#9E435C]',
+    label: 'Blush Hangat',
+    swatch: '#FDF7F8',
   },
   terang: {
     bg: 'bg-[#FFFFFF]',
-    surface: 'bg-[#F5F6F5]',
-    border: 'border-[#E6E8E6]',
-    text: 'text-[#1D211E]',
-    muted: 'text-[#636A65]',
-    accentBtn: 'bg-[#3D5A4F] text-[#FFFFFF] hover:bg-[#2F473E]',
+    surface: 'bg-[#FAF5F7]',
+    border: 'border-[#EDE2E6]',
+    text: 'text-[#261E21]',
+    muted: 'text-[#6D5C62]',
+    accentBtn: 'bg-[#B5536E] text-[#FFFFFF] hover:bg-[#9E435C]',
     label: 'Putih Tenang',
     swatch: '#FFFFFF',
   },
   malam: {
-    bg: 'bg-[#1A1E1C]',
-    surface: 'bg-[#232825]',
-    border: 'border-[#313834]',
-    text: 'text-[#E7E5DE]',
-    muted: 'text-[#A2A8A3]',
-    accentBtn: 'bg-[#5B7D6F] text-[#FAF9F6] hover:bg-[#4B6B5E]',
+    bg: 'bg-[#211A1D]',
+    surface: 'bg-[#2B2226]',
+    border: 'border-[#3E3137]',
+    text: 'text-[#F3EAED]',
+    muted: 'text-[#B9A4AC]',
+    accentBtn: 'bg-[#C86D85] text-[#FFFFFF] hover:bg-[#B5536E]',
     label: 'Malam Teduh',
-    swatch: '#1A1E1C',
+    swatch: '#211A1D',
   },
 };
 
@@ -141,10 +141,9 @@ export function BookReader({
       <header
         className={`shrink-0 border-b ${theme.border} ${theme.bg} relative z-30`}
       >
-        {/* Reading Progress Hairline */}
         <div className="h-0.5 w-full bg-black/5">
           <div
-            className="h-full bg-[#3D5A4F] transition-all duration-300"
+            className="h-full bg-[#B5536E] transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -153,10 +152,10 @@ export function BookReader({
           <button
             type="button"
             onClick={onClose}
-            className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${theme.muted} hover:opacity-100 hover:bg-black/5 transition-colors cursor-pointer whitespace-nowrap shrink-0`}
+            className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl ${theme.muted} hover:opacity-100 hover:bg-black/5 transition-colors cursor-pointer whitespace-nowrap shrink-0`}
           >
             <ArrowLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Kembali ke Koleksi</span>
+            <span className="hidden sm:inline">Kembali ke Perpustakaan</span>
             <span className="sm:hidden">Kembali</span>
           </button>
 
@@ -178,7 +177,7 @@ export function BookReader({
               }}
               aria-label="Pengaturan tampilan baca"
               aria-expanded={appearanceOpen}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
+              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-xl border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
             >
               <Type className="w-4 h-4" />
               <span className="hidden sm:inline">Tampilan</span>
@@ -192,7 +191,7 @@ export function BookReader({
               }}
               aria-label="Buka daftar isi"
               aria-expanded={tocOpen}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
+              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-xl border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
             >
               <List className="w-4 h-4" />
               <span className="hidden sm:inline">Daftar Isi</span>
@@ -202,11 +201,11 @@ export function BookReader({
               type="button"
               onClick={onToggleBookmark}
               aria-label={isBookmarked ? 'Hapus dari rak' : 'Simpan ke rak'}
-              className={`inline-flex items-center justify-center w-10 h-10 rounded-lg border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
+              className={`inline-flex items-center justify-center w-10 h-10 rounded-xl border ${theme.border} hover:bg-black/5 transition-colors cursor-pointer`}
             >
               <Bookmark
                 className={`w-4 h-4 ${
-                  isBookmarked ? 'fill-[#3D5A4F] text-[#3D5A4F]' : ''
+                  isBookmarked ? 'fill-[#B5536E] text-[#B5536E]' : ''
                 }`}
               />
             </button>
@@ -216,7 +215,7 @@ export function BookReader({
         {/* Appearance Settings Popover */}
         {appearanceOpen && (
           <div
-            className={`absolute right-4 sm:right-6 top-full mt-2 w-72 sm:w-80 p-5 rounded-xl border ${theme.border} ${theme.bg} shadow-xl z-40`}
+            className={`absolute right-4 sm:right-6 top-full mt-2 w-72 sm:w-80 p-5 rounded-2xl border ${theme.border} ${theme.bg} shadow-xl z-40`}
           >
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs font-semibold tracking-wider uppercase">
@@ -232,7 +231,6 @@ export function BookReader({
               </button>
             </div>
 
-            {/* Paper Tone */}
             <div className="mb-4">
               <p className={`text-xs mb-2 ${theme.muted}`}>Tema Kertas</p>
               <div className="grid grid-cols-3 gap-2">
@@ -245,9 +243,9 @@ export function BookReader({
                       onClick={() =>
                         onUpdateSettings({ ...settings, theme: t })
                       }
-                      className={`flex flex-col items-center gap-1.5 p-2 rounded-lg border text-[11px] font-medium cursor-pointer transition-colors ${
+                      className={`flex flex-col items-center gap-1.5 p-2 rounded-xl border text-[11px] font-medium cursor-pointer transition-colors ${
                         active
-                          ? 'border-[#3D5A4F] ring-1 ring-[#3D5A4F]'
+                          ? 'border-[#B5536E] ring-1 ring-[#B5536E]'
                           : `${theme.border}`
                       }`}
                     >
@@ -264,10 +262,9 @@ export function BookReader({
               </div>
             </div>
 
-            {/* Font Size */}
             <div className="mb-4">
               <p className={`text-xs mb-2 ${theme.muted}`}>Ukuran Huruf</p>
-              <div className={`grid grid-cols-3 gap-1 p-1 rounded-lg ${theme.surface}`}>
+              <div className={`grid grid-cols-3 gap-1 p-1 rounded-xl ${theme.surface}`}>
                 {(
                   [
                     { id: 'kecil', label: 'Kecil' },
@@ -281,9 +278,9 @@ export function BookReader({
                     onClick={() =>
                       onUpdateSettings({ ...settings, fontSize: item.id })
                     }
-                    className={`py-1.5 text-xs font-medium rounded-md cursor-pointer transition-colors ${
+                    className={`py-1.5 text-xs font-medium rounded-lg cursor-pointer transition-colors ${
                       settings.fontSize === item.id
-                        ? 'bg-[#3D5A4F] text-[#FAF9F6]'
+                        ? 'bg-[#B5536E] text-[#FFFFFF]'
                         : ''
                     }`}
                   >
@@ -293,10 +290,9 @@ export function BookReader({
               </div>
             </div>
 
-            {/* Font Family */}
             <div>
               <p className={`text-xs mb-2 ${theme.muted}`}>Jenis Huruf</p>
-              <div className={`grid grid-cols-2 gap-1 p-1 rounded-lg ${theme.surface}`}>
+              <div className={`grid grid-cols-2 gap-1 p-1 rounded-xl ${theme.surface}`}>
                 {(
                   [
                     { id: 'serif', label: 'Serif Klasik' },
@@ -309,9 +305,9 @@ export function BookReader({
                     onClick={() =>
                       onUpdateSettings({ ...settings, fontFamily: item.id })
                     }
-                    className={`py-1.5 text-xs font-medium rounded-md cursor-pointer transition-colors ${
+                    className={`py-1.5 text-xs font-medium rounded-lg cursor-pointer transition-colors ${
                       settings.fontFamily === item.id
-                        ? 'bg-[#3D5A4F] text-[#FAF9F6]'
+                        ? 'bg-[#B5536E] text-[#FFFFFF]'
                         : ''
                     }`}
                   >
@@ -324,9 +320,7 @@ export function BookReader({
         )}
       </header>
 
-      {/* Reader Body */}
       <div className="relative flex-1 flex overflow-hidden">
-        {/* Table of Contents Slide-Over */}
         {tocOpen && (
           <aside
             className={`w-80 max-w-full shrink-0 border-r ${theme.border} ${theme.surface} overflow-y-auto p-6 z-20`}
@@ -355,9 +349,9 @@ export function BookReader({
                       onChangeChapter(idx);
                       setTocOpen(false);
                     }}
-                    className={`w-full text-left p-3 rounded-lg transition-colors cursor-pointer ${
+                    className={`w-full text-left p-3 rounded-xl transition-colors cursor-pointer ${
                       active
-                        ? 'bg-[#3D5A4F] text-[#FAF9F6]'
+                        ? 'bg-[#B5536E] text-[#FFFFFF]'
                         : 'hover:bg-black/5'
                     }`}
                   >
@@ -377,7 +371,6 @@ export function BookReader({
           </aside>
         )}
 
-        {/* Main Reading Canvas */}
         <main
           ref={scrollContainerRef}
           className="flex-1 overflow-y-auto px-5 sm:px-8 py-12 sm:py-16"
@@ -422,7 +415,6 @@ export function BookReader({
               </aside>
             )}
 
-            {/* Chapter Navigation Footer */}
             <footer
               className={`mt-14 pt-8 border-t ${theme.border} flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4`}
             >
@@ -430,7 +422,7 @@ export function BookReader({
                 type="button"
                 disabled={isFirstChapter}
                 onClick={() => onChangeChapter(chapterIndex - 1)}
-                className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border ${theme.border} transition-colors ${
+                className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border ${theme.border} transition-colors ${
                   isFirstChapter
                     ? 'opacity-40 cursor-not-allowed'
                     : 'hover:bg-black/5 cursor-pointer'
@@ -444,11 +436,11 @@ export function BookReader({
                 <button
                   type="button"
                   onClick={() => onMarkChapterComplete(chapter.id)}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium rounded-lg border ${theme.border} transition-colors cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium rounded-xl border ${theme.border} transition-colors cursor-pointer ${
                     isCurrentCompleted ? 'opacity-80' : 'hover:bg-black/5'
                   }`}
                 >
-                  <Check className="w-3.5 h-3.5 text-[#3D5A4F]" />
+                  <Check className="w-3.5 h-3.5 text-[#B5536E]" />
                   <span>
                     {isCurrentCompleted ? 'Bab Ditandai Selesai' : 'Tandai Selesai'}
                   </span>
@@ -458,7 +450,7 @@ export function BookReader({
                   <button
                     type="button"
                     onClick={handleNextChapter}
-                    className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors cursor-pointer ${theme.accentBtn}`}
+                    className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl transition-colors cursor-pointer ${theme.accentBtn}`}
                   >
                     <span>Bab Selanjutnya</span>
                     <ChevronRight className="w-4 h-4" />
@@ -470,7 +462,7 @@ export function BookReader({
                       onMarkChapterComplete(chapter.id);
                       onClose();
                     }}
-                    className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors cursor-pointer ${theme.accentBtn}`}
+                    className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl transition-colors cursor-pointer ${theme.accentBtn}`}
                   >
                     <span>Selesai Membaca Buku</span>
                   </button>

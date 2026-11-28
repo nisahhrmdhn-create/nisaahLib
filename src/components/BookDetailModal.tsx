@@ -1,23 +1,27 @@
 import { useEffect } from 'react';
-import { Bookmark, BookOpen, X } from 'lucide-react';
+import { Bookmark, BookMarked, BookOpen, X } from 'lucide-react';
 import { Book, ReadingProgress } from '../types/library';
 import { BookCover } from './BookCover';
 
 interface BookDetailModalProps {
   book: Book | null;
   isBookmarked: boolean;
+  isBorrowedByUser: boolean;
   progress?: ReadingProgress;
   onClose: () => void;
   onToggleBookmark: (bookId: string) => void;
+  onBorrowBook: (book: Book) => void;
   onReadChapter: (book: Book, chapterIndex: number) => void;
 }
 
 export function BookDetailModal({
   book,
   isBookmarked,
+  isBorrowedByUser,
   progress,
   onClose,
   onToggleBookmark,
+  onBorrowBook,
   onReadChapter,
 }: BookDetailModalProps) {
   useEffect(() => {
@@ -37,25 +41,25 @@ export function BookDetailModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#1F2421]/45 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#2D2226]/45 backdrop-blur-xs"
       role="dialog"
       aria-modal="true"
       aria-labelledby="detail-book-title"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#FAF9F6] border border-[#E5E1D8] rounded-xl shadow-xl"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#FFFFFF] border border-[#EEDCE2] rounded-2xl shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#FAF9F6]/95 backdrop-blur-xs border-b border-[#E5E1D8]">
-          <p className="font-mono text-xs text-[#5E6862] tabular-nums">
+        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#FFFFFF]/95 backdrop-blur-xs border-b border-[#EEDCE2]">
+          <p className="font-mono text-xs text-[#6E5A62] tabular-nums">
             KATALOG {book.catalogNumber} · {book.category.toUpperCase()}
           </p>
           <button
             type="button"
             onClick={onClose}
             aria-label="Tutup rincian buku"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-[#4A524D] hover:text-[#1F2421] hover:bg-[#EFECE6] transition-colors cursor-pointer"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-[#6E5A62] hover:text-[#2D2226] hover:bg-[#FAF2F4] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -71,27 +75,52 @@ export function BookDetailModal({
                 <button
                   type="button"
                   onClick={() => onReadChapter(book, activeChapterIdx)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-[#FAF9F6] bg-[#3D5A4F] hover:bg-[#2F473E] rounded-lg transition-colors cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-[#FFFFFF] bg-[#B5536E] hover:bg-[#9E435C] rounded-xl transition-colors cursor-pointer"
                 >
                   <BookOpen className="w-4 h-4" />
                   <span>
                     {progress
                       ? `Lanjutkan (${book.chapters[activeChapterIdx]?.number})`
-                      : 'Baca Sekarang'}
+                      : 'Baca Daring'}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  disabled={book.availableStock <= 0 || isBorrowedByUser}
+                  onClick={() => {
+                    onClose();
+                    onBorrowBook(book);
+                  }}
+                  className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border transition-colors ${
+                    isBorrowedByUser
+                      ? 'bg-[#E6F4EC] border-[#C5E4D2] text-[#1E6B45] cursor-default'
+                      : book.availableStock <= 0
+                        ? 'bg-[#FAF2F4] border-[#EEDCE2] text-[#8C767F] cursor-not-allowed'
+                        : 'bg-[#FAF2F4] border-[#E5C9D3] text-[#783447] hover:bg-[#F4E1E7] cursor-pointer'
+                  }`}
+                >
+                  <BookMarked className="w-4 h-4" />
+                  <span>
+                    {isBorrowedByUser
+                      ? 'Sedang Anda Pinjam'
+                      : book.availableStock <= 0
+                        ? 'Stok Eksemplar Habis'
+                        : `Pinjam Buku (${book.availableStock}/${book.stock})`}
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => onToggleBookmark(book.id)}
-                  className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border transition-colors cursor-pointer ${
+                  className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl border transition-colors cursor-pointer ${
                     isBookmarked
-                      ? 'bg-[#EAE5DC] border-[#D5CEC2] text-[#1F2421]'
-                      : 'bg-transparent border-[#DCD7CC] text-[#4A524D] hover:bg-[#F1EFE9]'
+                      ? 'bg-[#F9E4EB] border-[#E5C2CE] text-[#6E2C40]'
+                      : 'bg-transparent border-[#EEDCE2] text-[#6E5A62] hover:bg-[#FAF2F4]'
                   }`}
                 >
                   <Bookmark
-                    className={`w-4 h-4 ${isBookmarked ? 'fill-[#3D5A4F] text-[#3D5A4F]' : ''}`}
+                    className={`w-4 h-4 ${isBookmarked ? 'fill-[#B5536E] text-[#B5536E]' : ''}`}
                   />
                   <span>{isBookmarked ? 'Tersimpan di Rak' : 'Simpan ke Rak'}</span>
                 </button>
@@ -102,45 +131,47 @@ export function BookDetailModal({
             <div className="md:col-span-8">
               <h2
                 id="detail-book-title"
-                className="font-serif text-3xl sm:text-4xl font-semibold text-[#1F2421] leading-tight editorial-balance"
+                className="font-serif text-3xl sm:text-4xl font-semibold text-[#2D2226] leading-tight editorial-balance"
               >
                 {book.title}
               </h2>
-              <p className="text-base text-[#4A524D] mt-1.5 mb-5">
+              <p className="text-base text-[#6E5A62] mt-1.5 mb-5">
                 {book.subtitle}
               </p>
 
-              <p className="text-sm sm:text-base text-[#343B37] leading-relaxed mb-6">
+              <p className="text-sm sm:text-base text-[#46373D] leading-relaxed mb-6">
                 {book.synopsis}
               </p>
 
               {/* Archival Accession Metadata Grid */}
-              <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 py-5 border-y border-[#E5E1D8] text-sm mb-7">
+              <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 py-5 border-y border-[#EEDCE2] text-sm mb-7">
                 <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">Penulis</dt>
-                  <dd className="font-medium text-[#1F2421]">{book.author}</dd>
+                  <dt className="text-xs text-[#8C767F] mb-0.5">Penulis</dt>
+                  <dd className="font-medium text-[#2D2226]">{book.author}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">Penerbit</dt>
-                  <dd className="font-medium text-[#1F2421]">{book.publisher}</dd>
+                  <dt className="text-xs text-[#8C767F] mb-0.5">Penerbit</dt>
+                  <dd className="font-medium text-[#2D2226]">{book.publisher}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">Tahun Terbit</dt>
-                  <dd className="font-medium text-[#1F2421] tabular-nums">{book.year}</dd>
+                  <dt className="text-xs text-[#8C767F] mb-0.5">Tahun Terbit</dt>
+                  <dd className="font-medium text-[#2D2226] tabular-nums">{book.year}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">Tebal Naskah</dt>
-                  <dd className="font-medium text-[#1F2421] tabular-nums">
+                  <dt className="text-xs text-[#8C767F] mb-0.5">Ketersediaan</dt>
+                  <dd className="font-medium text-[#2D2226] tabular-nums">
+                    {book.availableStock} dari {book.stock} eksemplar
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs text-[#8C767F] mb-0.5">Tebal Naskah</dt>
+                  <dd className="font-medium text-[#2D2226] tabular-nums">
                     {book.pages} halaman
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">Bahasa</dt>
-                  <dd className="font-medium text-[#1F2421]">{book.language}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-[#646D67] mb-0.5">ISBN</dt>
-                  <dd className="font-mono text-xs text-[#1F2421] tabular-nums pt-0.5">
+                  <dt className="text-xs text-[#8C767F] mb-0.5">ISBN</dt>
+                  <dd className="font-mono text-xs text-[#2D2226] tabular-nums pt-0.5">
                     {book.isbn}
                   </dd>
                 </div>
@@ -148,20 +179,20 @@ export function BookDetailModal({
 
               {/* Author Bio */}
               <div className="mb-7">
-                <h3 className="text-xs font-medium tracking-wider uppercase text-[#646D67] mb-1.5">
+                <h3 className="text-xs font-medium tracking-wider uppercase text-[#8C767F] mb-1.5">
                   Tentang Penulis
                 </h3>
-                <p className="text-sm text-[#4A524D] leading-relaxed">
+                <p className="text-sm text-[#6E5A62] leading-relaxed">
                   {book.authorBio}
                 </p>
               </div>
 
               {/* Clickable Chapter Index */}
               <div>
-                <h3 className="text-xs font-medium tracking-wider uppercase text-[#646D67] mb-3">
+                <h3 className="text-xs font-medium tracking-wider uppercase text-[#8C767F] mb-3">
                   Daftar Bab ({book.chapters.length} Bagian)
                 </h3>
-                <div className="divide-y divide-[#EAE6DD] border border-[#E5E1D8] rounded-lg bg-[#F8F7F4]">
+                <div className="divide-y divide-[#F2E3E8] border border-[#EEDCE2] rounded-xl bg-[#FDF9FA]">
                   {book.chapters.map((chapter, index) => {
                     const isCompleted =
                       progress?.completedChapters.includes(chapter.id) ?? false;
@@ -170,19 +201,19 @@ export function BookDetailModal({
                         key={chapter.id}
                         type="button"
                         onClick={() => onReadChapter(book, index)}
-                        className="w-full flex items-center justify-between gap-4 px-4 py-3.5 text-left hover:bg-[#EFECE6] transition-colors cursor-pointer first:rounded-t-lg last:rounded-b-lg"
+                        className="w-full flex items-center justify-between gap-4 px-4 py-3.5 text-left hover:bg-[#F9ECEF] transition-colors cursor-pointer first:rounded-t-xl last:rounded-b-xl"
                       >
                         <div className="min-w-0">
-                          <span className="font-mono text-xs text-[#5E6862] mr-3 tabular-nums">
+                          <span className="font-mono text-xs text-[#8C767F] mr-3 tabular-nums">
                             {chapter.number}
                           </span>
-                          <span className="text-sm font-medium text-[#1F2421]">
+                          <span className="text-sm font-medium text-[#2D2226]">
                             {chapter.title}
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 shrink-0 text-xs text-[#5E6862] tabular-nums">
+                        <div className="flex items-center gap-3 shrink-0 text-xs text-[#8C767F] tabular-nums">
                           {isCompleted && (
-                            <span className="text-[#3D5A4F] font-medium">
+                            <span className="text-[#1E6B45] font-medium">
                               Selesai
                             </span>
                           )}

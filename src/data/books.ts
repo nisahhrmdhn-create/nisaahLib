@@ -29,9 +29,11 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-8910-12-4',
     readCount: 3420,
     readingMinutes: 14,
+    stock: 5,
+    availableStock: 4,
     coverImage: '/src/assets/images/cover_botanical_sage_1795675650420.jpg',
-    clothColor: '#DCE2DA',
-    clothAccent: '#3D5A4F',
+    clothColor: '#F3E5E9',
+    clothAccent: '#B5536E',
     featuredQuote:
       'Mengamati sehelai daun yang mengering bukan pelajaran tentang kehilangan, melainkan cara memahami bagaimana waktu bekerja tanpa tergesa.',
     synopsis:
@@ -91,9 +93,11 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-7401-88-1',
     readCount: 2890,
     readingMinutes: 16,
+    stock: 4,
+    availableStock: 3,
     coverImage: '/src/assets/images/cover_archipelago_wood_1795675651399.jpg',
-    clothColor: '#E6DFD3',
-    clothAccent: '#5C5043',
+    clothColor: '#F1E8E4',
+    clothAccent: '#9A5A6B',
     featuredQuote:
       'Sebuah rumah yang baik di iklim tropis tidak pernah memerangi matahari; ia mengundang bayangan untuk tinggal di dalamnya.',
     synopsis:
@@ -150,9 +154,11 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-5120-04-9',
     readCount: 4180,
     readingMinutes: 12,
+    stock: 6,
+    availableStock: 5,
     coverImage: '/src/assets/images/cover_misty_horizon_1795675651683.jpg',
-    clothColor: '#DCE2E8',
-    clothAccent: '#465869',
+    clothColor: '#ECE4EB',
+    clothAccent: '#7C5A72',
     featuredQuote:
       'Kabut pagi di muara tidak menghapus bukit-bukit itu; ia hanya mengajarkan mata kita untuk membaca jarak dengan lebih lembut.',
     synopsis:
@@ -207,9 +213,11 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-6102-39-7',
     readCount: 3150,
     readingMinutes: 15,
+    stock: 4,
+    availableStock: 3,
     coverImage: '/src/assets/images/cover_ceramic_light_1795675652440.jpg',
-    clothColor: '#E8E4DC',
-    clothAccent: '#524E46',
+    clothColor: '#F4EAEB',
+    clothAccent: '#8F5867',
     featuredQuote:
       'Keheningan sejati bukanlah pelarian dari tanggung jawab dunia, melainkan tempat kita memulihkan kejernihan sebelum kembali bertindak.',
     synopsis:
@@ -263,9 +271,11 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-9045-17-3',
     readCount: 2540,
     readingMinutes: 17,
+    stock: 3,
+    availableStock: 2,
     coverImage: '/src/assets/images/cover_indigo_waves_1795675651997.jpg',
-    clothColor: '#E5DEC9',
-    clothAccent: '#3C4D5C',
+    clothColor: '#EFE4E6',
+    clothAccent: '#7D5161',
     featuredQuote:
       'Jauh sebelum kompas besi menyebar luas, para pelaut Nusantara membaca peta melalui arah angin, warna air, dan barisan bintang di cakrawala.',
     synopsis:
@@ -319,8 +329,10 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-8114-50-2',
     readCount: 1970,
     readingMinutes: 13,
-    clothColor: '#DCE2DA',
-    clothAccent: '#3D5A4F',
+    stock: 4,
+    availableStock: 4,
+    clothColor: '#F6E6EB',
+    clothAccent: '#B5536E',
     featuredQuote:
       'Bentuk huruf yang baik bekerja seperti kaca jendela yang jernih: pembaca melaluinya untuk bertemu makna tanpa terganggu oleh hiasan berlebihan.',
     synopsis:
@@ -373,8 +385,10 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-8910-33-9',
     readCount: 3640,
     readingMinutes: 14,
-    clothColor: '#E9E3D8',
-    clothAccent: '#5C5446',
+    stock: 5,
+    availableStock: 4,
+    clothColor: '#F2E7E4',
+    clothAccent: '#9A5463',
     featuredQuote:
       'Di rumah tua itu, lemari buku tidak dikunci; siapa pun boleh mengambil satu jilid dan membawanya ke beranda asalkan dikembalikan sebelum malam.',
     synopsis:
@@ -427,8 +441,10 @@ export const BOOKS_CATALOG: Book[] = [
     isbn: '978-623-6102-71-7',
     readCount: 2210,
     readingMinutes: 13,
-    clothColor: '#DDE2E5',
-    clothAccent: '#3E4C59',
+    stock: 4,
+    availableStock: 4,
+    clothColor: '#EFE3EA',
+    clothAccent: '#85536C',
     featuredQuote:
       'Akal sehat tidak pernah bertentangan dengan kelembutan hati; keduanya saling menjaga agar pengetahuan tidak menjadi dingin dan terasing.',
     synopsis:
